@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lichtershow</title>
+    <style>
+        /* Der gesamte Hintergrund wird schwarz */
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Das Licht wird als Vollbild-Hintergrund angewendet */
+        #licht {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: black;
+            z-index: -1; /* sorgt dafür, dass der Hintergrund sichtbar bleibt */
+        }
+    </style>
+</head>
+<body>
+    <div id="licht"></div>
+    <script src="script.js"></script>
+</body>
+</html>
