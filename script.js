@@ -1,13 +1,44 @@
-let licht = document.getElementById('licht');
+async function startLightShow() {
+    try {
+        // Mikrofonzugriff anfordern
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
 
-// Array mit verschiedenen Farben
-const farben = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF'];
+        // Audio-Kontext erstellen
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const source = audioContext.createMediaStreamSource(stream);
 
-// Funktion, die das Licht alle 500ms in einer neuen Farbe ändern lässt
-function farbeWechseln() {
-    let zufall = Math.floor(Math.random() * farben.length); // Zufällige Farbe auswählen
-    licht.style.backgroundColor = farben[zufall]; // Farbe auf das Licht anwenden
+        // Audio-Analyser einrichten
+        const analyser = audioContext.createAnalyser();
+        analyser.fftSize = 256; // Größe der Frequenzdaten
+        source.connect(analyser);
+
+        const dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+        function changeBackground() {
+            // Frequenzdaten abrufen
+            analyser.getByteFrequencyData(dataArray);
+
+            // Durchschnittliche Lautstärke berechnen
+            const avg = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
+
+            // Farben basierend auf Lautstärke ändern
+            if (avg > 150) {
+                document.body.style.backgroundColor = "orange";
+            } else {
+                document.body.style.backgroundColor = "yellow";
+            }
+
+            // Nächste Animation starten
+            requestAnimationFrame(changeBackground);
+        }
+
+        // Animation starten
+        changeBackground();
+    } catch (err) {
+        console.error("Mikrofon konnte nicht verwendet werden:", err);
+        alert("Mikrofonzugriff abgelehnt oder ein Fehler ist aufgetreten.");
+    }
 }
 
-// Alle 500ms die Farbe wechseln
-setInterval(farbeWechseln, 500);
+// Lichtshow starten
+startLightShow();
