@@ -11,5 +11,5 @@ function startLightShow() {
     setInterval(function() {
         document.body.style.backgroundColor = colors[index];
         index = (index + 1) % colors.length; // Wechsel zwischen 0 und 1
-    }, 1000); // 1 Sekunde für den Farbwechsel
+    }, 2000); // 2 Sekunden für den Farbwechsel (mit Übergang)
 }
