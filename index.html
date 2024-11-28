@@ -5,39 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lichtshow Fanprojekt</title>
     <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-family: Arial, sans-serif;
-            background-color: black;
-            transition: background-color 1s ease; /* Übergang für Farbwechsel */
-        }
-        .start-page {
-            text-align: center;
-            color: white;
-        }
-        h1 {
-            margin-bottom: 20px;
-        }
-        p {
-            font-size: 18px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 18px;
-            cursor: pointer;
-            background-color: orange;
-            color: white;
-            border: none;
-            border-radius: 5px;
-        }
-        button:hover {
-            background-color: yellow;
-        }
+        /* Dein CSS-Stil */
     </style>
 </head>
 <body>
@@ -48,22 +16,7 @@
         <button id="startButton">Start</button>
     </div>
     
-    <script>
-        // Funktion für den Start-Button
-        document.getElementById("startButton").addEventListener("click", function() {
-            document.getElementById("startPage").style.display = "none";  // Verstecke die Startseite
-            startLightShow();  // Starte die Lichtshow
-        });
-
-        // Funktion für die Lichtshow
-        function startLightShow() {
-            let colors = ["orange", "yellow"];
-            let index = 0;
-            setInterval(function() {
-                document.body.style.backgroundColor = colors[index];
-                index = (index + 1) % colors.length; // Wechsel zwischen 0 und 1
-            }, 1000); // 1 Sekunde für den Farbwechsel
-        }
-    </script>
+    <!-- Link zum externen JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
